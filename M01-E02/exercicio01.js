@@ -1,4 +1,4 @@
-//const PrimeiroNome = "Everton";
+//const PrimeiroNome = "Everton";/
 
 let PrimeiroNome = "Everton"; //usar let quando precisar alterar a variavel
 
