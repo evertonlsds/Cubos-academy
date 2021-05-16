@@ -38,7 +38,8 @@ app.get("/instrutores",(req, res)=>{
 
 app.get("/instrutores/:idConsultado", (req, res)=>{
     req.params.idConsultado
-    const instrutor = 
+    const instrutor = listaDeInstrutores.find(instrutor => instrutor.id === Number(req.params.idConsultado));
+    res.json(instrutor);
 })
 
 app.listen(8000);
