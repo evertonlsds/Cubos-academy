@@ -7,7 +7,14 @@ function consultarTodosInstrutores(req, res){
 }
 
 function consultarUmInstrutor(req, res){
-    const instrutor = listaDeInstrutores.find(instrutor => instrutor.id === Number(req.params.idConsultado));
+    const instrutor = listaDeInstrutores.find((instrutor) => instrutor.id === Number(req.params.idConsultado));
+        if(instrutor === undefined){
+            res.status(404);
+            res.json({erro: "Instrutor " + req.params.idConsultado +  " não existe"});
+            return;
+
+        }
+
     res.json(instrutor);
 }
 
