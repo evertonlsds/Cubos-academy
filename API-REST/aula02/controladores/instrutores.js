@@ -8,7 +8,7 @@ function consultarTodosInstrutores(req, res){
 
 function consultarUmInstrutor(req, res){
     const instrutor = listaDeInstrutores.find((instrutor) => instrutor.id === Number(req.params.idConsultado));
-        if(instrutor === undefined){
+        if(!instrutor){
             res.status(404);
             res.json({erro: "Instrutor " + req.params.idConsultado +  " não existe"});
             return;
@@ -21,6 +21,52 @@ function consultarUmInstrutor(req, res){
   let proximoId = 5;
 
 function criarInstrutor(req, res){
+
+    if(!req.body.nome){
+        res.status(400);
+        res.json({erro: "o campo nome é obrigatório"});
+        return;
+    }
+
+    if(!req.body.idade){
+        res.status(400);
+        res.json({erro: "o campo idade é obrigatório"});
+        return;
+    }
+
+    if(!req.body.areaDeAtuacao){
+        res.status(400);
+        res.json({erro: "o campo areaDeAtuacao é obrigatório"});
+        return;
+    }
+
+    if(typeof req.body.nome !== 'string'){
+        res.status(404);
+        res.json({erro: "O campo nome deve ser preenchida com um texto"});
+        return;
+
+    }
+
+    if(typeof req.body.idade !== 'number'){
+        res.status(404);
+        res.json({erro: "O campo idade deve ser preenchida com um numero"});
+        return;
+    
+    }
+
+    if(typeof req.body.areaDeAtuacao !== 'string'){
+        res.status(404);
+        res.json({erro: "O campo area de atuação deve ser preenchida com um texto"});
+        return;
+
+    }
+
+    if(req.body.idade < 18){
+        res.status(404);
+        res.json({erro: "O instrutor deve ser maior de idade"});
+        return;
+
+    }
     const novoInstrutor ={
         id: proximoId,
         nome: req.body.nome,
