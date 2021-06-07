@@ -1,5 +1,12 @@
 const listaDeInstrutores = require ("../dados/instrutores");
-
+const areaDeAtuacaoValida = [
+    "Logica",
+    "Front-end",
+    "Back-End",
+    "Full-Stack",
+    "Flutter",
+    "Soft Skill"
+];
 
 
 function consultarTodosInstrutores(req, res){
@@ -37,7 +44,7 @@ function criarInstrutor(req, res){
     if(!req.body.areaDeAtuacao){
         res.status(400);
         res.json({erro: "o campo areaDeAtuacao é obrigatório"});
-        return;
+        return; 
     }
 
     if(typeof req.body.nome !== 'string'){
@@ -64,6 +71,13 @@ function criarInstrutor(req, res){
     if(req.body.idade < 18){
         res.status(404);
         res.json({erro: "O instrutor deve ser maior de idade"});
+        return;
+
+    }
+
+    if(!areaDeAtuacaoValida.includes(req.body.areaDeAtuacao)){
+        res.status(404);
+        res.json({erro: "Área de atuação é inválida"});
         return;
 
     }
